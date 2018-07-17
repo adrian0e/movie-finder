@@ -1,0 +1,69 @@
+  <div class="input-group">
+    <input type="text"
+           [(ngModel)]="searchString"
+           class="form-control"
+           placeholder="Search for a Movie..."
+           aria-label="Search for a Movie..."
+           aria-describedby="basic-addon2"
+    >
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary"
+              type="button" (click)="searchMovies()">Search</button>
+    </div>
+  </div>
+
+  <br>
+
+  <div *ngIf="searchResults">
+    <div class="card">
+      <div class="card-header">
+        Search results
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-2 text-center" *ngFor="let movie of searchResults, let i = index">
+            <div *ngIf="i < 18">
+              <img *ngIf="movie.poster_path" class="img-thumbnail"
+                   src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}"
+                   width="150px"
+              >
+              <img *ngIf="!movie.poster_path" class="img-thumbnail"
+                   src="https://s-media-cache-ak0.pinimg.com/originals/d3/8b/c3/d38bc38ad9ba60f9091aa2a9b3f4190f.png"
+                   width="150px"
+              >
+              <h5>{{movie.title}}</h5>
+              <p>{{movie.release_date}}</p>
+              <p><a href="#" routerLink="/movie/{{movie.id}}" class="btn btn-primary">View Details</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="card">
+    <div class="card-header">
+      Popular movies
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-2 text-center" *ngFor="let movie of popularMoviesList, let i = index">
+          <div *ngIf="i < 12">
+            <img *ngIf="movie.poster_path" class="img-thumbnail"
+                 src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}"
+                 width="150px"
+            >
+            <img *ngIf="!movie.poster_path" class="img-thumbnail"
+                 src="https://s-media-cache-ak0.pinimg.com/originals/d3/8b/c3/d38bc38ad9ba60f9091aa2a9b3f4190f.png"
+                 width="150px"
+            >
+            <h6>{{movie.title}}</h6>
+            <p>{{movie.release_date}}</p>
+            <p><a href="#" routerLink="/movie/{{movie.id}}" class="btn btn-primary">View Details</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

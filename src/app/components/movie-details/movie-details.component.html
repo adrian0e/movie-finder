@@ -1,0 +1,40 @@
+<div *ngIf="movie">
+  <div class="card">
+    <div class="card-header">
+      {{movie.original_title}}
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-5">
+            <img *ngIf="movie.poster_path"
+                 class="img-thumbnail"
+                 src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}"
+            >
+            <img *ngIf="!movie.poster_path"
+                 class="img-thumbnail"
+                 src="https://s-media-cache-ak0.pinimg.com/originals/d3/8b/c3/d38bc38ad9ba60f9091aa2a9b3f4190f.png"
+            >
+        </div>
+        <div class="col-md-7">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <strong>Genres: </strong> <span *ngFor="let gen of movie.genres">{{gen.name}}/</span>
+            </li>
+            <li class="list-group-item">
+              <strong>Release date: </strong>{{movie.release_date}}
+            </li>
+            <li class="list-group-item">
+              <strong>Overview: </strong>{{movie.overview}}
+            </li>
+            <li class="list-group-item">
+              <strong>Rating: </strong>{{movie.vote_average}}
+            </li>
+            <br>
+          </ul>
+         <a *ngIf="movie.homepage" href="{{movie.homepage}}"
+            target="_blank" class="btn btn-primary">Visit movie website</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
