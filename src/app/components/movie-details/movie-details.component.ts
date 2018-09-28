@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 
 import {MoviedbService} from '../../services/moviedb.service';
+import {Movie} from '../../movies.model';
+
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
@@ -10,7 +12,7 @@ import {MoviedbService} from '../../services/moviedb.service';
 export class MovieDetailsComponent implements OnInit {
 
   id: number;
-  movie: any[];
+  movie: Movie;
 
   constructor(private movieService: MoviedbService, private route: ActivatedRoute) { }
 
@@ -24,9 +26,9 @@ export class MovieDetailsComponent implements OnInit {
 
     this.movieService.getMovieDetails(this.id)
       .subscribe(
-        (movie: any) => {
+        (movie: Movie) => {
           this.movie = movie;
-          console.log(this.movie + ' test');
+          console.log(this.movie);
         }
       );
 

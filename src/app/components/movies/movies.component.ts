@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+
 import {MoviedbService} from '../../services/moviedb.service';
+import {Movies, MoviesResults} from '../../movies.model';
 
 @Component({
   selector: 'app-movies',
@@ -7,11 +9,12 @@ import {MoviedbService} from '../../services/moviedb.service';
   styleUrls: ['./movies.component.css']
 })
 export class MoviesComponent implements OnInit {
-  popularMoviesList: Array<object>;
-  searchResults: any[];
+  popularMoviesList: Array<MoviesResults>;
+  searchResults: Array<MoviesResults>;
   searchString: string;
 
-  constructor(private movieService: MoviedbService) { }
+  constructor(private movieService: MoviedbService) {
+  }
 
   ngOnInit() {
     this.getPopular();
@@ -24,18 +27,18 @@ export class MoviesComponent implements OnInit {
 
     this.movieService.searchMovie(this.searchString)
       .subscribe(
-        (movies: any) => {
-            this.searchResults = movies.results;
-            // console.log(this.searchResults);
+        (movies: Movies) => {
+          this.searchResults = movies.results;
         }
       );
   }
 
   getPopular() {
-    this.movieService.getPopularMovies().subscribe((movies: any) => {
-      this.popularMoviesList = movies.results;
-      // console.log(this.popularMoviesList);
-    });
+    this.movieService.getPopularMovies()
+      .subscribe((movies: Movies) => {
+        this.popularMoviesList = movies.results;
+        console.log(this.popularMoviesList);
+      });
   }
 
 }
